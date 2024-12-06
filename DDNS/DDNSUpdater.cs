@@ -42,10 +42,11 @@ namespace DDNS
             }
         }
 
-        private async Task<string> GetPublicIPAddress()
+        public async Task<string> GetPublicIPAddress()
         {
             using var client = new HttpClient();
-            return await client.GetStringAsync("https://api.ipify.org");
+            var response = await client.GetAsync("https://api.ipify.org");
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }
